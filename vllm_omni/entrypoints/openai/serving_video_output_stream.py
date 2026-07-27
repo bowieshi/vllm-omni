@@ -478,15 +478,6 @@ class OmniStreamingVideoOutputHandler:
         videos = None
         if hasattr(result, "images") and result.images:
             videos = result.images
-        elif hasattr(result, "request_output"):
-            request_output = result.request_output
-            if isinstance(request_output, dict) and request_output.get("images"):
-                videos = request_output["images"]
-            elif not isinstance(request_output, dict):
-                if hasattr(request_output, "images") and request_output.images:
-                    videos = request_output.images
-                elif hasattr(request_output, "multimodal_output") and request_output.multimodal_output:
-                    videos = request_output.multimodal_output.get("video")
         if videos is None and hasattr(result, "multimodal_output") and result.multimodal_output:
             videos = result.multimodal_output.get("video")
 

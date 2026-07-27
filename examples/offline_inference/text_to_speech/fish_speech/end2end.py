@@ -148,7 +148,7 @@ def main(args):
 
     t_start = time.perf_counter()
     for stage_outputs in omni.generate(inputs):
-        request_output = stage_outputs.request_output
+        request_output = stage_outputs
         if request_output is None or not request_output.outputs:
             continue
         _save_wav(
@@ -188,7 +188,7 @@ async def main_streaming(args):
     chunk_idx = 0
 
     async for stage_output in omni.generate(prompt, request_id=request_id):
-        mm = stage_output.request_output.outputs[0].multimodal_output
+        mm = stage_output.outputs[0].multimodal_output
         if not stage_output.finished:
             t_now = time.perf_counter()
             audio = mm.get("audio")

@@ -596,7 +596,7 @@ def main():
         images = getattr(output, "images", None)
         if images:
             break
-        req_out = getattr(output, "request_output", None)
+        req_out = output
         images = getattr(req_out, "images", None) if req_out is not None else None
         if images:
             break
@@ -635,7 +635,7 @@ def _images_from_multimodal_output(outputs: list[Any]) -> list[Any]:
 
     pil_images: list[Any] = []
     for output in outputs:
-        req_out = getattr(output, "request_output", output)
+        req_out = output
         for completion in getattr(req_out, "outputs", None) or []:
             # multimodal_output is a MultimodalPayload (a Mapping) keyed by modality,
             # matching how omni examples (ming_flash_omni / magi_human / dynin) read it.
